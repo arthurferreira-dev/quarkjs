@@ -1,7 +1,7 @@
 # QuarkJS
 
 ![Version Badge](https://img.shields.io/badge/Version-1.0%20(Demo)-red)
-![NPM Version](https://img.shields.io/npm/v/:quark-js)
+![NPM Version](https://img.shields.io/npm/v/:@arthurferreira-dev/quarkjs)
 
 A language that is simple to understand, easy to use, and practical for building React applications. Its files use the `.jtx` extension (**`JavaScript Typed XML`**) and are compiled to `.jsx` or `.tsx`.
 
