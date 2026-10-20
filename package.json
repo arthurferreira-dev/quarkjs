@@ -1,0 +1,37 @@
+{
+  "name": "@arthurferreira-dev/quarkjs",
+  "description": "The easier way to create React projects",
+  "type": "module",
+  "version": "0.1.0",
+  "main": "builderman.mjs",
+  "bin": {
+    "quarkjs": "builderman.mjs"
+  },
+  "keywords": [
+    "react",
+    "jsx",
+    "tsx",
+    "quarkjs",
+    "jtx",
+    "project react"
+  ],
+  "author": "@arthurferreira-dev",
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arthurferreira-dev/quarkjs"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "files": [
+    "builderman.mjs",
+    "jtx.mjs",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}
