@@ -609,6 +609,16 @@ function rebaseMod(mod, file) {
   return q + r + q;
 }
 
+const hasJsx = (code) =>
+  /(?<![\w$)\]])<\/?\s*[A-Za-z][\w$.]*[\s/>]/.test(stripStrings(code));
+
+function retarget(p, ext, code = "") {
+  return p.replace(/\.(jsx|tsx|js|ts)$/, (_, e) => {
+    const jsx = e === "jsx" || e === "tsx" || hasJsx(code);
+    return ext === "tsx" ? (jsx ? ".tsx" : ".ts") : jsx ? ".jsx" : ".js";
+  });
+}
+
 function relImport(from, to) {
   const r = path.relative(path.dirname(from), to.replace(/\.(jsx?|tsx?)$/, ""));
   return r.startsWith(".") ? r : "./" + r;
@@ -788,7 +798,7 @@ function build(
     if (n) dependencies.add(n);
   };
 
-  const outName = (f) => (ext ? f.replace(/\.(jsx|tsx)$/, "." + ext) : f);
+  const outName = (f) => (ext ? retarget(f, ext) : f);
   const fileIsTs = (file) => /\.tsx?$/.test(outName(file));
   const stripsTypes = (it) =>
     (it.t === "fn" && (it.edits.length > 0 || it.plainRest !== it.rest)) ||
@@ -1004,7 +1014,7 @@ export function compile(source, options) {
 
 export function compileProject(entries, { ext = "jsx" } = {}) {
   const warnings = [];
-  const fixExt = (p) => p.replace(/\.(jsx|tsx)$/, "." + ext);
+  const fixExt = (p, code = "") => retarget(p, ext, code);
   const safe = (e, fn) => {
     try {
       return fn();
@@ -1082,7 +1092,7 @@ export function compileProject(entries, { ext = "jsx" } = {}) {
     r.dependencies.forEach((d) => deps.add(d));
     for (const w of r.warnings) warnings.push(`${e.file}: ${w}`);
     const outs = r.files.map((f) => ({
-      path: fixExt(path.join(e.dir, f.path)),
+      path: fixExt(path.join(e.dir, f.path), f.code),
       code: f.code,
       from: e.file,
     }));

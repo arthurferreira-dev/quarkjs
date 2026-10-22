@@ -1,13 +1,26 @@
 # QuarkJS
 
-![Version Badge](https://img.shields.io/badge/Version-1.0%20(Demo)-red)
-![NPM Version](https://img.shields.io/npm/v/:quark-js)
+![Version Badge](<https://img.shields.io/badge/Version-0.1.1%20(Demo)-red>)
 
 A language that is simple to understand, easy to use, and practical for building React applications. Its files use the `.jtx` extension (**`JavaScript Typed XML`**) and are compiled to `.jsx` or `.tsx`.
 
 ## Structure
 
 QuarkJS uses just 2 modules: the **JTX** module and the **Builderman** module. The **JTX** module translates all the syntax and functions of `.jtx` files, while **Builderman** uses some of JTX's functions to build all `.jtx` files into `.jsx`/`.tsx`.
+
+## How to install
+
+Type this row in your terminal:
+
+```shell
+npm i -g @arthurferreira-dev/quarkjs
+```
+
+And if you go compile your .jtx files, type this other row:
+
+```shell
+quarkjs
+```
 
 ## Features
 
@@ -197,3 +210,67 @@ import { createBrowserRouter } from "react-router-dom";
 
 export const router = createBrowserRouter([...]);
 ```
+
+## Typing
+
+QuarkJS supports TypeScript types out of the box. For example:
+
+```jtx
+@path="pages/Home.jsx"
+Home() {
+  state name, setName: string = "Home"
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h1>Simple Example of {name}</h1>
+      <p onClick={() => setName("Home2")}>Change name</p>
+      <Heart color="red" size={48} />
+    </div>
+  );
+}
+```
+
+Becomes:
+
+```tsx
+import { Heart } from "lucide-react";
+import { useState } from "react";
+
+export function Home() {
+  const [name, setName] = useState<string>("Home");
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h1>Simple Example of {name}</h1>
+      <p onClick={() => setName("Home2")}>Change name</p>
+      <Heart color="red" size={48} />
+    </div>
+  );
+}
+```
+
+If you compile your files to jsx, the types in `state`, `ref`, `share` and function signatures are removed from the compiled files (the compiler warns you). TypeScript written elsewhere in the function body is not removed, so use tsx if you need it.
+
+## VSCode Extension
+
+Currently, there is no official QuarkJS extension on the VSCode marketplace. The only way to use it is by importing the [VSIX](jtx-language.vsix) file into your own editor.
+
+To import it, follow these steps:
+
+<img src="docs/step_1.png" alt="Step One" width="500">
+
+<br>
+
+<img src="docs/step_2.png" alt="Step Two" width="500">
+
+Download the [VSIX](jtx-language.vsix) and import it into VSCode.
+
+<img src="docs/step_3.png" alt="Step Three" width="500">
+
+If this shows up in your extensions tab, congratulations, you've learned how to install the QuarkJS extension!
+
+## Prettier Plugin
+
+If your want to use Prettier in your QuarkJS project see this repository:
+
+[prettier-plugin-quarkjs](https://github.com/arthurferreira-dev/prettier-plugin-quarkjs)
