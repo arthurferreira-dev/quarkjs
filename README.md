@@ -210,7 +210,6 @@ import { createBrowserRouter } from "react-router-dom";
 
 export const router = createBrowserRouter([...]);
 ```
-<<<<<<< HEAD
 
 ## Typing
 
@@ -275,3 +274,20 @@ If this shows up in your extensions tab, congratulations, you've learned how to 
 If your want to use Prettier in your QuarkJS project see this repository:
 
 [prettier-plugin-quarkjs](https://github.com/arthurferreira-dev/prettier-plugin-quarkjs)
+
+## Vite Plugin
+
+The plugin comes bundled with the npm package. You can use it through `vite.config.js/ts`:
+
+```js
+import react from "@vitejs/plugin-react";
+import jtx from "@arthurferreira-dev/quarkjs/vite";
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  plugins: [jtx(), react()],
+});
+```
+
+> [!IMPORTANT]  
+> Place `jtx()` before `react()` in the `plugins` array.

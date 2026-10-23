@@ -2,8 +2,12 @@
   "name": "@arthurferreira-dev/quarkjs",
   "description": "The easier way to create React projects",
   "type": "module",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "builderman.mjs",
+  "exports": {
+    ".": "./jtx.mjs",
+    "./vite": "./vite-plugin-jtx.mjs"
+  },
   "bin": {
     "quarkjs": "builderman.mjs"
   },
@@ -30,6 +34,7 @@
     "jtx.mjs",
     "LICENSE",
     "README.md",
+    "vite-plugin-jtx.mjs",
     "docs/step_1.png",
     "docs/step_2.png",
     "docs/step_3.png"
